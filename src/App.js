@@ -10,7 +10,7 @@ import FlowTreeTool from './pages/FlowTreeTool';
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Box width="100%">
         <Route exact path="/" component={Home} />
         <Route path="/flowtreetool" component={FlowTreeTool} />
