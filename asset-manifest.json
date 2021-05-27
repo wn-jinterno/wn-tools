@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/wn-tools/static/css/main.bd606b6c.chunk.css",
+    "main.js": "/wn-tools/static/js/main.bdd01b6f.chunk.js",
+    "main.js.map": "/wn-tools/static/js/main.bdd01b6f.chunk.js.map",
+    "runtime-main.js": "/wn-tools/static/js/runtime-main.60610daf.js",
+    "runtime-main.js.map": "/wn-tools/static/js/runtime-main.60610daf.js.map",
+    "static/css/2.9c48f3ed.chunk.css": "/wn-tools/static/css/2.9c48f3ed.chunk.css",
+    "static/js/2.d3d1b1b5.chunk.js": "/wn-tools/static/js/2.d3d1b1b5.chunk.js",
+    "static/js/2.d3d1b1b5.chunk.js.map": "/wn-tools/static/js/2.d3d1b1b5.chunk.js.map",
+    "static/js/3.695ef41f.chunk.js": "/wn-tools/static/js/3.695ef41f.chunk.js",
+    "static/js/3.695ef41f.chunk.js.map": "/wn-tools/static/js/3.695ef41f.chunk.js.map",
+    "index.html": "/wn-tools/index.html",
+    "static/css/2.9c48f3ed.chunk.css.map": "/wn-tools/static/css/2.9c48f3ed.chunk.css.map",
+    "static/css/main.bd606b6c.chunk.css.map": "/wn-tools/static/css/main.bd606b6c.chunk.css.map",
+    "static/js/2.d3d1b1b5.chunk.js.LICENSE.txt": "/wn-tools/static/js/2.d3d1b1b5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.60610daf.js",
+    "static/css/2.9c48f3ed.chunk.css",
+    "static/js/2.d3d1b1b5.chunk.js",
+    "static/css/main.bd606b6c.chunk.css",
+    "static/js/main.bdd01b6f.chunk.js"
+  ]
+}
