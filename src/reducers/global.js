@@ -4,7 +4,19 @@ const initialState = {
     isLoading: false,
     statusMessage: "",
     flowTreeTool: {
-        availableNodes: [],
+        availableNodes: [
+            { title: "processSale" },
+            { title: "onRequestSetAmount" },
+            { title: "submitAmount" },
+            { title: "onSelectApplication" },
+            { title: "submitApplication" },
+            { title: "onSignatureRequired" },
+            { title: "submitSignature" },
+            { title: "onDeviceError" },
+            { title: "onSaleResponse" },
+            { title: "onError" },
+            { title: "onDeviceDisconnected" },
+        ],
         jsonEditorContent: "",
         flowTree: []
     }

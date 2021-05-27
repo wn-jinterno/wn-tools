@@ -12,7 +12,7 @@ export default class FlowTreeTool extends Component {
 
     render() {
         return (
-            <BaseContentCmp title="Flow Tree Generator">
+            <BaseContentCmp title="Flow Tree Generator" withLinkToHome>
                 <Flex
                     width="100%"
                     height="100%"
@@ -20,7 +20,7 @@ export default class FlowTreeTool extends Component {
                     sx={{
                         position: "fixed",
                         top: 0,
-                        left: 0
+                        left: 0,
                     }}
                 >
                     <Box

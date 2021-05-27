@@ -8,30 +8,36 @@ import ErrorBoundary from './ErrorBoundary';
 class NodesPanelCmp extends React.Component {
     constructor(props) {
         super(props);
+    }
 
-        this.state = {
-            treeData: [
-                { title: "processSale" },
-                { title: "onRequestSetAmount" },
-                { title: "submitAmount" },
-                { title: "onDeviceError" },
-                { title: "onSaleResponse" },
-                { title: "onError" },
-            ]
-        }
+    onTreeChange = (treeData) => {
+        const { setAvailableNodes } = this.props;
+        setAvailableNodes(treeData);
+    }
+
+    onDeleteClick = (path) => {
+        const { availableNodes, setAvailableNodes } = this.props;
+        const getNodeKey = ({ treeIndex }) => treeIndex;
+        const treeData = removeNodeAtPath({
+            treeData: availableNodes,
+            path,
+            getNodeKey,
+        });
+
+        setAvailableNodes(treeData);
     }
 
     render() {
-        const getNodeKey = ({ treeIndex }) => treeIndex;
+        const { availableNodes } = this.props;
 
         return (
             <Box height="100%" py={15}>
                 <Heading p={15}>Nodes</Heading>
                 <SortableTree
-                    treeData={this.state.treeData}
+                    treeData={availableNodes}
                     dndType="FLOW_TREE_DND_TYPE"
                     innerStyle={{ padding: "10px"}}
-                    onChange={treeData => this.setState({ treeData })}
+                    onChange={this.onTreeChange}
                     shouldCopyOnOutsideDrop={true}
                     canNodeHaveChildren={node => false}
                     canDrop={node => false}
@@ -40,15 +46,7 @@ class NodesPanelCmp extends React.Component {
                             <IconButton 
                                 icon={CrossIcon} 
                                 intent="danger" 
-                                onClick={() =>
-                                    this.setState(state => ({
-                                        treeData: removeNodeAtPath({
-                                        treeData: state.treeData,
-                                        path,
-                                        getNodeKey,
-                                        }),
-                                    }))
-                                }
+                                onClick={() => this.onDeleteClick(path)}
                             />
                         ],
                     })}

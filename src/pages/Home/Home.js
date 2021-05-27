@@ -17,15 +17,15 @@ export default class Home extends Component {
             },
             {
                 "name": "Test Tool 1",
-                "link": "/flowtreetool",
+                "link": "/testtool1",
             },
             {
                 "name": "Test Tool 2",
-                "link": "/flowtreetool",
+                "link": "/testtool2",
             },
             {
                 "name": "Test Tool 3",
-                "link": "/flowtreetool",
+                "link": "/testtool3",
             }
         ];
 

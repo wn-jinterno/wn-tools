@@ -19,7 +19,12 @@ class FlowTreeEditor extends React.Component {
     onTreeChange = (treeData) => {
         const { flowTree, setFlowTree, setJsonEditorContent } = this.props;
         setFlowTree(treeData);
-        setJsonEditorContent(JSON.stringify(treeData, null, '\t'));
+
+        if (treeData === undefined || treeData === null || treeData.length === 0) {
+            setJsonEditorContent("");
+        } else {
+            setJsonEditorContent(JSON.stringify(treeData, null, '\t'));
+        }
     }
 
     onDeleteClick = (path) => {
@@ -32,7 +37,12 @@ class FlowTreeEditor extends React.Component {
         });
 
         setFlowTree(treeData);
-        setJsonEditorContent(JSON.stringify(treeData, null, '\t'));
+        
+        if (treeData === undefined || treeData === null || treeData.length === 0) {
+            setJsonEditorContent("");
+        } else {
+            setJsonEditorContent(JSON.stringify(treeData, null, '\t'));
+        }
     }
 
     canDrop = ({ node, nextParent, prevPath, nextPath }) => {
