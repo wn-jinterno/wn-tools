@@ -41,31 +41,40 @@ class JsonEditorCmp extends React.Component {
         } else {
             try {
                 const flowTreeExportFromJSON = jsonlint.parse(jsonStr);
-                let nullParentCount = 0;
-                const flatDataFromJsonEditor = getTreeFromFlatData({
-                    flatData: flowTreeExportFromJSON.nodes.map(node => {
-                        if (node.parent === null) {
-                            nullParentCount += 1;
-                        }
-                        return ({ 
-                            ...node, 
-                            title: node.name,
-                            expanded: true,
+
+
+                if (has(flowTreeExportFromJSON, "name") 
+                    && has(flowTreeExportFromJSON, "nodes") 
+                    && isString(flowTreeExportFromJSON.name) 
+                    && isArray(flowTreeExportFromJSON.nodes)) {
+                        let nullParentCount = 0;
+                        const flatDataFromJsonEditor = getTreeFromFlatData({
+                            flatData: flowTreeExportFromJSON.nodes.map(node => {
+                                if (node.parent === null) {
+                                    nullParentCount += 1;
+                                }
+                                return ({ 
+                                    ...node, 
+                                    title: node.name,
+                                    expanded: true,
+                                });
+                            }),
+                            getKey: node => node.id, // resolve a node's key
+                            getParentKey: node => node.parent, // resolve a node's parent's key
+                            rootKey: null, // The value of the parent key when there is no parent (i.e., at root level)
                         });
-                    }),
-                    getKey: node => node.id, // resolve a node's key
-                    getParentKey: node => node.parent, // resolve a node's parent's key
-                    rootKey: null, // The value of the parent key when there is no parent (i.e., at root level)
-                });
-
-                if (nullParentCount > 1) {
-                    throw new Error(`Flow tree can only contain a single root node. Found ${nullParentCount} with null parent.`);
+        
+                        if (nullParentCount > 1) {
+                            throw new Error(`Flow tree can only contain a single root node. Found ${nullParentCount} with null parent.`);
+                        }
+        
+                        setFlowTreeExportName(flowTreeExportFromJSON.name);
+                        setFlowTreeExportNodes(flatDataFromJsonEditor);
+                        setFlowTree(flatDataFromJsonEditor);
+                        setFlowTreeParsingError("");
+                } else {
+                    throw new Error(`JSON format must be { "name": "tree-name", "nodes": [] }`)
                 }
-
-                setFlowTreeExportName(flowTreeExportFromJSON.name);
-                setFlowTreeExportNodes(flatDataFromJsonEditor);
-                setFlowTree(flatDataFromJsonEditor);
-                setFlowTreeParsingError("");
             } catch(err) {
                 console.log(`ERROR - ${err.message}`);
                 setFlowTreeParsingError(err.message || "");
