@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/wn-tools/static/css/main.2f6d8da7.chunk.css",
-    "main.js": "/wn-tools/static/js/main.dad59322.chunk.js",
-    "main.js.map": "/wn-tools/static/js/main.dad59322.chunk.js.map",
+    "main.js": "/wn-tools/static/js/main.d7c37c1f.chunk.js",
+    "main.js.map": "/wn-tools/static/js/main.d7c37c1f.chunk.js.map",
     "runtime-main.js": "/wn-tools/static/js/runtime-main.bb78c7a3.js",
     "runtime-main.js.map": "/wn-tools/static/js/runtime-main.bb78c7a3.js.map",
     "static/css/2.9c48f3ed.chunk.css": "/wn-tools/static/css/2.9c48f3ed.chunk.css",
-    "static/js/2.0cfa0a17.chunk.js": "/wn-tools/static/js/2.0cfa0a17.chunk.js",
-    "static/js/2.0cfa0a17.chunk.js.map": "/wn-tools/static/js/2.0cfa0a17.chunk.js.map",
+    "static/js/2.db1162b6.chunk.js": "/wn-tools/static/js/2.db1162b6.chunk.js",
+    "static/js/2.db1162b6.chunk.js.map": "/wn-tools/static/js/2.db1162b6.chunk.js.map",
     "static/js/3.99099fab.chunk.js": "/wn-tools/static/js/3.99099fab.chunk.js",
     "static/js/3.99099fab.chunk.js.map": "/wn-tools/static/js/3.99099fab.chunk.js.map",
     "index.html": "/wn-tools/index.html",
     "static/css/2.9c48f3ed.chunk.css.map": "/wn-tools/static/css/2.9c48f3ed.chunk.css.map",
     "static/css/main.2f6d8da7.chunk.css.map": "/wn-tools/static/css/main.2f6d8da7.chunk.css.map",
-    "static/js/2.0cfa0a17.chunk.js.LICENSE.txt": "/wn-tools/static/js/2.0cfa0a17.chunk.js.LICENSE.txt"
+    "static/js/2.db1162b6.chunk.js.LICENSE.txt": "/wn-tools/static/js/2.db1162b6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.bb78c7a3.js",
     "static/css/2.9c48f3ed.chunk.css",
-    "static/js/2.0cfa0a17.chunk.js",
+    "static/js/2.db1162b6.chunk.js",
     "static/css/main.2f6d8da7.chunk.css",
-    "static/js/main.dad59322.chunk.js"
+    "static/js/main.d7c37c1f.chunk.js"
   ]
 }
