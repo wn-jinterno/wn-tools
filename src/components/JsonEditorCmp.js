@@ -43,13 +43,12 @@ class JsonEditorCmp extends React.Component {
             try {
                 const flowTreeExportFromJSON = jsonlint.parse(jsonStr);
 
-
                 if (has(flowTreeExportFromJSON, "name") 
                     && has(flowTreeExportFromJSON, "nodes") 
                     && isString(flowTreeExportFromJSON.name) 
                     && isArray(flowTreeExportFromJSON.nodes)) {
                         let nullParentCount = 0;
-                        const flatDataFromJsonEditor = getTreeFromFlatData({
+                        const newTreeFromFlatData = getTreeFromFlatData({
                             flatData: flowTreeExportFromJSON.nodes.map(node => {
                                 if (node.parent === null) {
                                     nullParentCount += 1;
@@ -70,8 +69,8 @@ class JsonEditorCmp extends React.Component {
                         }
         
                         setFlowTreeExportName(flowTreeExportFromJSON.name);
-                        setFlowTreeExportNodes(flatDataFromJsonEditor);
-                        setFlowTree(flatDataFromJsonEditor);
+                        setFlowTreeExportNodes(flowTreeExportFromJSON.nodes);
+                        setFlowTree(newTreeFromFlatData);
                         setFlowTreeParsingError("");
                 } else {
                     throw new Error(`JSON format must be { "name": "tree-name", "nodes": [] }`)
