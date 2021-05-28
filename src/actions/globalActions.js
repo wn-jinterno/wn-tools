@@ -26,6 +26,20 @@ export const setFlowTree = flowTree => ({
     }
 });
 
+export const setFlowTreeExportName = flowTreeExportName => ({
+    type: ACTIONS.SET_FLOW_TREE_EXPORT_NAME,
+    payload: {
+        flowTreeExportName
+    }
+});
+
+export const setFlowTreeExportNodes = flowTreeExportNodes => ({
+    type: ACTIONS.SET_FLOW_TREE_EXPORT_NODES,
+    payload: {
+        flowTreeExportNodes
+    }
+});
+
 export const setAvailableNodes = availableNodes => ({
     type: ACTIONS.SET_AVAILABLE_NODES,
     payload: {
@@ -37,5 +51,12 @@ export const setJsonEditorContent = jsonEditorContent => ({
     type: ACTIONS.SET_JSON_EDITOR_CONTENT,
     payload: {
         jsonEditorContent
+    }
+});
+
+export const setFlowTreeParsingError = parsingError => ({
+    type: ACTIONS.SET_FLOW_TREE_PARSING_ERROR,
+    payload: {
+        parsingError
     }
 });

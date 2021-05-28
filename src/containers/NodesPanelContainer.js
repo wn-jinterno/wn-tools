@@ -7,6 +7,7 @@ const mapStateToProps = (state , ownProps) => {
       isLoading: state.global.isLoading,
       statusMessage: state.global.statusMessage,
       availableNodes: state.global.flowTreeTool.availableNodes,
+      ...ownProps,
     }
   }
   

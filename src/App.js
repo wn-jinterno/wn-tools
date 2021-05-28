@@ -1,10 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Box, Flex } from 'rebass';
-
-
+import { Box } from 'rebass';
 import './App.css';
-
 import Home from './pages/Home';
 import FlowTreeTool from './pages/FlowTreeTool';
 import PageNotFoundCmp from './components/PageNotFoundCmp';

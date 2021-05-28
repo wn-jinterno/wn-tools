@@ -1,0 +1,45 @@
+{
+    "name": "standard-polling-flow-tree",
+    "nodes": [
+        {
+            "id": 0,
+            "name": "processSale",
+            "parent": null
+        },
+        {
+            "id": 1,
+            "name": "onRequestSetAmount",
+            "parent": 0
+        },
+        {
+            "id": 2,
+            "name": "submitAmount",
+            "parent": 1
+        },
+        {
+            "id": 3,
+            "name": "onSaleResponse",
+            "parent": 2
+        },
+        {
+            "id": 4,
+            "name": "onError",
+            "parent": 2
+        },
+        {
+            "id": 5,
+            "name": "onDeviceError",
+            "parent": 2
+        },
+        {
+            "id": 6,
+            "name": "onDeviceError",
+            "parent": 1
+        },
+        {
+            "id": 7,
+            "name": "onDeviceError",
+            "parent": 0
+        }
+    ]
+}

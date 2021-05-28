@@ -4,21 +4,14 @@ const initialState = {
     isLoading: false,
     statusMessage: "",
     flowTreeTool: {
-        availableNodes: [
-            { title: "processSale" },
-            { title: "onRequestSetAmount" },
-            { title: "submitAmount" },
-            { title: "onSelectApplication" },
-            { title: "submitApplication" },
-            { title: "onSignatureRequired" },
-            { title: "submitSignature" },
-            { title: "onDeviceError" },
-            { title: "onSaleResponse" },
-            { title: "onError" },
-            { title: "onDeviceDisconnected" },
-        ],
+        availableNodes: [],
         jsonEditorContent: "",
-        flowTree: []
+        flowTree: [],
+        flowTreeExport: {
+            name: "",
+            nodes: [],
+        },
+        parsingError: "",
     }
 };
 
@@ -55,6 +48,32 @@ export default function(state = initialState, action) {
                 },
             }
         }
+        case ACTIONS.SET_FLOW_TREE_EXPORT_NAME: {
+            const { flowTreeExportName } = action.payload;
+            return {
+                ...state,
+                flowTreeTool: {
+                    ...state.flowTreeTool,
+                    flowTreeExport: {
+                        ...state.flowTreeTool.flowTreeExport,
+                        name: flowTreeExportName,
+                    },
+                },
+            }
+        }
+        case ACTIONS.SET_FLOW_TREE_EXPORT_NODES: {
+            const { flowTreeExportNodes } = action.payload;
+            return {
+                ...state,
+                flowTreeTool: {
+                    ...state.flowTreeTool,
+                    flowTreeExport: {
+                        ...state.flowTreeTool.flowTreeExport,
+                        nodes: flowTreeExportNodes,
+                    },
+                },
+            }
+        }
         case ACTIONS.SET_AVAILABLE_NODES: {
             const { availableNodes } = action.payload;
 
@@ -74,6 +93,17 @@ export default function(state = initialState, action) {
                 flowTreeTool: {
                     ...state.flowTreeTool,
                     jsonEditorContent,
+                },
+            }
+        }
+        case ACTIONS.SET_FLOW_TREE_PARSING_ERROR: {
+            const { parsingError } = action.payload;
+
+            return {
+                ...state,
+                flowTreeTool: {
+                    ...state.flowTreeTool,
+                    parsingError,
                 },
             }
         }

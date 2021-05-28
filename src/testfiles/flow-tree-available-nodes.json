@@ -1,0 +1,37 @@
+{
+    "availableNodes": [
+        {
+            "name": "processSale"
+        },
+        {
+            "name": "onRequestSetAmount"
+        },
+        {
+            "name": "submitAmount"
+        },
+        {
+            "name": "onSelectApplication"
+        },
+        {
+            "name": "submitApplication"
+        },
+        {
+            "name": "onSignatureRequired"
+        },
+        {
+            "name": "submitSignature"
+        },
+        {
+            "name": "onDeviceError"
+        },
+        {
+            "name": "onSaleResponse"
+        },
+        {
+            "name": "onError"
+        },
+        {
+            "name": "onDeviceDisconnected"
+        }
+    ]
+}

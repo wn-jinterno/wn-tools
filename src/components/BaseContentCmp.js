@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Flex, Text, Box } from 'rebass';
 import styles from '../styles.module.css';
 
-const BaseContentCmp = ({ title, description, withLinkToHome, children, ...props}) => {
+const BaseContentCmp = ({ title, description, withLinkToHome, children, navChildren, ...props}) => {
     return (
         <Box
             width="100%"
@@ -12,7 +12,7 @@ const BaseContentCmp = ({ title, description, withLinkToHome, children, ...props
         >
             <Flex
                 width="100%"
-                height={85}
+                height={60}
                 p={15}
                 bg='white'
                 alignItems='center'
@@ -33,14 +33,15 @@ const BaseContentCmp = ({ title, description, withLinkToHome, children, ...props
                         </Flex>
                     )
                 }
-                <Text p={2} fontSize={32} fontWeight='bold'>{title}</Text>
+                <Text p={2} fontSize={28} fontWeight='bold'>{title}</Text>
                 <Box mx='auto' />
+                { navChildren }
             </Flex>
             <Flex
                 width="100%"
                 height="100%"
                 sx={{
-                    paddingTop: "85px"
+                    paddingTop: "60px"
                 }}
             >
 

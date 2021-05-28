@@ -6,6 +6,8 @@ const mapStateToProps = (state , ownProps) => {
     return {
       isLoading: state.global.isLoading,
       statusMessage: state.global.statusMessage,
+      flowTreeExportName: state.global.flowTreeTool.flowTreeExport.name,
+      jsonEditorContent: state.global.flowTreeTool.jsonEditorContent,
     }
   }
   
