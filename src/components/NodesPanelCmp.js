@@ -1,4 +1,4 @@
-import { AddIcon, Button, CaretDownIcon, CrossIcon, IconButton, Menu, Popover, Position, Text, toaster } from 'evergreen-ui';
+import { AddIcon, Button, CaretDownIcon, CrossIcon, DownloadIcon, IconButton, ImportIcon, Menu, Popover, Position, Text, toaster } from 'evergreen-ui';
 import React from 'react';
 import SortableTree, { removeNodeAtPath } from 'react-sortable-tree';
 import { Box, Flex, Heading } from 'rebass';
@@ -112,7 +112,7 @@ class NodesPanelCmp extends React.Component {
                                     content={
                                         <Menu>
                                             <Menu.Group>
-                                                <Menu.Item onSelect={ () => this.fileInputRef.current.click() }>
+                                                <Menu.Item icon={ImportIcon} onSelect={ () => this.fileInputRef.current.click() }>
                                                     <Flex>
                                                         <input
                                                             ref={this.fileInputRef}
@@ -126,6 +126,7 @@ class NodesPanelCmp extends React.Component {
                                                 </Menu.Item>
                                                 <Menu.Divider />
                                                 <Menu.Item 
+                                                    icon={DownloadIcon}
                                                     disabled={isEmpty(availableNodes)} 
                                                     onSelect={ () => this.onExportBtnClick() }
                                                 >

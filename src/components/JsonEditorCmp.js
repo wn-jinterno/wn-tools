@@ -9,8 +9,9 @@ import { getTreeFromFlatData } from 'react-sortable-tree';
 import jsonlint from 'jsonlint-mod';
 import { Box, Flex } from 'rebass';
 import SubPanelHeaderCmp from './SubPanelHeaderCmp';
-import { Button, CaretDownIcon, Menu, Popover, Position, toaster } from 'evergreen-ui';
+import { Button, CaretDownIcon, ClipboardIcon, DownloadIcon, ImportIcon, Menu, Popover, Position, toaster } from 'evergreen-ui';
 import { exportDataToJsonFile } from '../utils';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 class JsonEditorCmp extends React.Component {
     constructor(props) {
@@ -127,12 +128,23 @@ class JsonEditorCmp extends React.Component {
                             <Flex
                                 flexDirection="row"
                             >
+                                <Flex 
+                                    marginRight="15px"
+                                    paddingRight="15px"
+                                    sx={{
+                                        borderRight: "1px solid #c8c8c8"
+                                    }}
+                                >
+                                    <CopyToClipboard disabled={isEmpty(jsonEditorContent)} text={jsonEditorContent} onCopy={() => toaster.notify("Flow tree JSON copied to clipboard!")}>
+                                        <Button iconBefore={ClipboardIcon}>Copy</Button>
+                                    </CopyToClipboard>
+                                </Flex>
                                 <Popover
                                     position={Position.BOTTOM_RIGHT}
                                     content={
                                         <Menu>
                                             <Menu.Group>
-                                                <Menu.Item onSelect={ () => this.fileInputRef.current.click() }>
+                                                <Menu.Item icon={ImportIcon} onSelect={ () => this.fileInputRef.current.click() }>
                                                     <Flex>
                                                         <input
                                                             ref={this.fileInputRef}
@@ -146,7 +158,8 @@ class JsonEditorCmp extends React.Component {
                                                 </Menu.Item>
                                                 <Menu.Divider />
                                                 <Menu.Item 
-                                                    disabled={isEmpty(flowTreeExportName) && isEmpty(flowTreeExportNodes)} 
+                                                    icon={DownloadIcon}
+                                                    disabled={isEmpty(flowTreeExportName) || isEmpty(flowTreeExportNodes)} 
                                                     onSelect={ () => this.onExportBtnClick() }
                                                 >
                                                     Export JSON
