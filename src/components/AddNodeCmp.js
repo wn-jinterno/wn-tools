@@ -1,6 +1,6 @@
-import { Button, Dialog, FormField, Pane, PlusIcon, TextInputField, toaster } from 'evergreen-ui';
+import { Button, Dialog, IconButton, PlusIcon, TextInputField, Tooltip } from 'evergreen-ui';
 import React from 'react';
-import { Box, Flex, Text } from 'rebass';
+import { Box, Flex } from 'rebass';
 
 const AddNodeCmp = ({ onAddNode }) => {
     const [isShown, setIsShown] = React.useState(false);
@@ -19,11 +19,7 @@ const AddNodeCmp = ({ onAddNode }) => {
 
     return (
         <Box 
-            marginRight="15px"
-            paddingRight="15px"
-            sx={{
-                borderRight: "1px solid #c8c8c8"
-            }}
+            marginRight="5px"
         >
             <Dialog
                 isShown={isShown}
@@ -50,8 +46,9 @@ const AddNodeCmp = ({ onAddNode }) => {
                     </Flex>
                 </Flex>
             </Dialog>
-
-            <Button iconBefore={PlusIcon} onClick={() => setIsShown(true)}>Add Node</Button>
+            <Tooltip content="Add Node">
+                <IconButton icon={PlusIcon} onClick={() => setIsShown(true)} />
+            </Tooltip>
         </Box>
     )
 }

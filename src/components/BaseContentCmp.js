@@ -2,9 +2,8 @@ import { ArrowLeftIcon } from 'evergreen-ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Flex, Text, Box } from 'rebass';
-import styles from '../styles.module.css';
 
-const BaseContentCmp = ({ title, description, withLinkToHome, children, navChildren, ...props}) => {
+const BaseContentCmp = ({ title, description, withLinkToHome, children, navChildren }) => {
     return (
         <Box
             width="100%"
@@ -33,7 +32,7 @@ const BaseContentCmp = ({ title, description, withLinkToHome, children, navChild
                         </Flex>
                     )
                 }
-                <Text p={2} fontSize={28} fontWeight='bold'>{title}</Text>
+                <Text p={2} fontSize={24} fontWeight='bold'>{title}</Text>
                 <Box mx='auto' />
                 { navChildren }
             </Flex>

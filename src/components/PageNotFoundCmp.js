@@ -1,4 +1,4 @@
-import { HomeIcon, IconButton, Button, CrossIcon, BanCircleIcon, DeleteIcon } from 'evergreen-ui';
+import { HomeIcon, Button } from 'evergreen-ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Flex, Text } from 'rebass';

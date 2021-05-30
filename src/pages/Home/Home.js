@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Flex, Heading, Link, Box } from 'rebass';
+import { Flex, Box } from 'rebass';
 import BaseContentCmp from '../../components/BaseContentCmp';
 import { Avatar } from 'evergreen-ui';
 
-export default class Home extends Component {
-    constructor(props) {
-        super(props);
-    }
+const Home = () => {
 
-    renderToolIcons = () => {
+    const renderToolIcons = () => {
         const toolLists = [
             {
                 "name": "Flow Tree Tool",
@@ -68,19 +65,19 @@ export default class Home extends Component {
             </Flex>
         );
     }
-    
-    render() {
-        return (
-            <BaseContentCmp title="Home">
-                <Flex
-                    width="100%"
-                    px="25%"
-                    py={30}
-                    alignItems='center'
-                >
-                    { this.renderToolIcons() }
-                </Flex>
-            </BaseContentCmp>
-        )
-    }
+
+    return (
+        <BaseContentCmp title="Home">
+            <Flex
+                width="100%"
+                px="25%"
+                py={30}
+                alignItems='center'
+            >
+                { renderToolIcons() }
+            </Flex>
+        </BaseContentCmp>
+    );
 }
+
+export default Home;

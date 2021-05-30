@@ -1,11 +1,13 @@
-import { AddIcon, CrossIcon, IconButton, Switch, Text, TextInput } from 'evergreen-ui';
+import { CrossIcon, IconButton, Switch, Text, TextInput, toaster, Tooltip } from 'evergreen-ui';
 import React from 'react';
-import SortableTree, { getFlatDataFromTree, removeNodeAtPath, toggleExpandedForAll } from 'react-sortable-tree';
+import SortableTree, { getFlatDataFromTree, removeNodeAtPath, toggleExpandedForAll, getTreeFromFlatData } from 'react-sortable-tree';
 import { Box, Flex } from 'rebass';
-import { isEmpty } from 'underscore';
+import { has, isArray, isEmpty, isString } from 'underscore';
 import ErrorPanelCmp from './ErrorPanelCmp';
-import InstructionsCmp from './InstructionsCmp';
 import SubPanelHeaderCmp from './SubPanelHeaderCmp';
+import FlowTreePlaceholderRenderer from './FlowTreePlaceholderRenderer';
+import jsonlint from 'jsonlint-mod';
+import TreeNodeContentRenderer from './TreeNodeContentRenderer';
 
 class FlowTreeEditor extends React.Component {
     constructor(props) {
@@ -65,10 +67,8 @@ class FlowTreeEditor extends React.Component {
         return flowTree.length === 0 || nextParent !== null;
     };
 
-    onFlowTreeNameChange = (e) => {
+    onFlowTreeNameChange = (newName) => {
         const { setFlowTreeExportName, flowTreeExport, setJsonEditorContent } = this.props;
-
-        const newName = e.target.value;
         setFlowTreeExportName(newName);
 
         const newTreeExportData = {
@@ -93,6 +93,64 @@ class FlowTreeEditor extends React.Component {
         });
     }
 
+    onDrop = (files) => {
+        if (!isEmpty(files)) {
+            const fileReader = new FileReader();
+            fileReader.readAsText(files[0], "UTF-8");
+            fileReader.onload = e => {
+                try {
+                    const jsonStr = e.target.result;
+                    const jsonData = jsonlint.parse(jsonStr);
+
+                    if (has(jsonData, "name") && has(jsonData, "nodes") && isString(jsonData.name) && isArray(jsonData.nodes)) {
+                        let nullParentCount = 0;
+                        const newTreeFromFlatData = getTreeFromFlatData({
+                            flatData: jsonData.nodes.map(node => {
+                                if (node.parent === null) {
+                                    nullParentCount += 1;
+                                }
+                                return ({ 
+                                    ...node, 
+                                    title: node.name,
+                                    expanded: true,
+                                });
+                            }),
+                            getKey: node => node.id, // resolve a node's key
+                            getParentKey: node => node.parent, // resolve a node's parent's key
+                            rootKey: null, // The value of the parent key when there is no parent (i.e., at root level)
+                        });
+        
+                        if (nullParentCount > 1) {
+                            throw new Error(`Flow tree can only contain a single root node. Found ${nullParentCount} with null parent.`);
+                        }
+                        
+                        this.onFlowTreeNameChange(jsonData.name);
+                        this.onTreeChange(newTreeFromFlatData);
+
+                        toaster.success("File has been read successfully!");
+                    } else {
+                        throw new Error(`JSON format must be { "name": "tree-name", "nodes": [] }`)
+                    }
+                } catch(err) {
+                    toaster.danger(`Error - ${err.message}`);
+                }
+            }
+            fileReader.onerror = e => {
+                toaster.danger("Failed to read file!");
+                fileReader.abort();
+            }
+        }
+    }
+
+    clearAllNodes = () => {
+        const { flowTree } = this.props;
+
+        if (!isEmpty(flowTree)) {
+            this.onTreeChange([]);
+            toaster.notify("Flow tree nodes cleared!");
+        }
+    }
+
     render() {
         const { 
             flowTree, 
@@ -108,13 +166,14 @@ class FlowTreeEditor extends React.Component {
                         actionsCmp={
                             <Flex
                                 flexDirection="row"
+                                flexWrap="wrap"
                             >
                                 <Flex
                                     flexDirection="column"
                                     justifyContent="center"
                                     marginRight="5px"
                                 >
-                                    <Text>Tree Name</Text>
+                                    <Text fontSize={12}>Tree Name</Text>
                                 </Flex>
                                 <Flex 
                                     marginRight="15px"
@@ -127,7 +186,7 @@ class FlowTreeEditor extends React.Component {
                                         required
                                         value={flowTreeExportName}
                                         placeholder="Enter flow tree name"
-                                        onChange={this.onFlowTreeNameChange}
+                                        onChange={e => this.onFlowTreeNameChange(e.target.value)}
                                     />
                                 </Flex>
                                 <Flex
@@ -135,11 +194,16 @@ class FlowTreeEditor extends React.Component {
                                     justifyContent="center"
                                     marginRight="5px"
                                 >
-                                    <Text>Expand All</Text>
+                                    <Text fontSize={12}>Expand All</Text>
                                 </Flex>
                                 <Flex
                                     flexDirection="column"
                                     justifyContent="center"
+                                    marginRight="15px"
+                                    paddingRight="15px"
+                                    sx={{
+                                        borderRight: "1px solid #c8c8c8"
+                                    }}
                                 >
                                     <Switch 
                                         disabled={isEmpty(flowTree)}
@@ -147,38 +211,44 @@ class FlowTreeEditor extends React.Component {
                                         onChange={this.onExpandAllNodesSwitchChange} 
                                     />
                                 </Flex>
+                                <Flex>
+                                    <Tooltip content="Clear All">   
+                                        <IconButton intent="danger" icon={CrossIcon} onClick={this.clearAllNodes} />
+                                    </Tooltip>
+                                </Flex>
                             </Flex>
                         }
                     />
                     {
                         isEmpty(flowTreeParsingError) ? ( 
-                            <React.Fragment>
-                                <SortableTree
-                                    innerStyle={{ padding: "10px"}}
-                                    treeData={flowTree}
-                                    dndType="FLOW_TREE_DND_TYPE"
-                                    onChange={this.onTreeChange}
-                                    canDrop={this.canDrop}
-                                    generateNodeProps={({ node, path }) => ({
-                                        buttons: [
-                                            <IconButton 
-                                                icon={CrossIcon} 
-                                                intent="danger" 
-                                                onClick={() => this.onDeleteClick(path)}
-                                            />
-                                        ],
-                                    })}
-                                />
-                                { 
-                                    isEmpty(flowTree) && (
-                                        <InstructionsCmp
-                                            icon={AddIcon}
-                                        >
-                                            Drag Nodes or Import JSON File
-                                        </InstructionsCmp>
-                                    )
-                                }
-                            </React.Fragment>
+                            <SortableTree
+                                innerStyle={{ padding: "10px"}}
+                                treeData={flowTree}
+                                dndType="FLOW_TREE_DND_TYPE"
+                                onChange={this.onTreeChange}
+                                canDrop={this.canDrop}
+                                generateNodeProps={({ node, path }) => ({
+                                    buttons: [
+                                        <IconButton 
+                                            icon={CrossIcon} 
+                                            intent="danger" 
+                                            onClick={() => this.onDeleteClick(path)}
+                                            style={{
+                                                border: "none"
+                                            }}
+                                        />
+                                    ],
+                                })}
+                                nodeContentRenderer={TreeNodeContentRenderer}
+                                placeholderRenderer={({ isOver, canDrop }) => (
+                                    <FlowTreePlaceholderRenderer
+                                        onDrop={this.onDrop}
+                                        isOver={isOver}
+                                        canDrop={canDrop}
+                                    />
+                                )}
+
+                            />
                         )
                         :
                         (

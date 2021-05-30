@@ -15,7 +15,7 @@ const initialState = {
     }
 };
 
-export default function(state = initialState, action) {
+const globalReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTIONS.RESET_STATE: {
             return {
@@ -112,4 +112,4 @@ export default function(state = initialState, action) {
     }
 }
 
-
+export default globalReducer;

@@ -2,7 +2,7 @@ import { Icon, Text } from 'evergreen-ui';
 import React from 'react';
 import { Flex } from 'rebass';
 
-const InstructionsCmp = ({ icon, children }) => {
+const InstructionsCmp = ({ icon, iconColor = "#d9d9d9", textColor = "#d9d9d9", children, style = {} }) => {
     return (
         <Flex 
             flexDirection="column"
@@ -11,12 +11,15 @@ const InstructionsCmp = ({ icon, children }) => {
             padding={30}
             justifyContent="center"
             alignItems="center"
+            sx={{
+                ...style,         
+            }}
         >
             {
                 icon && (
                     <Flex marginBottom={20}>
                         <Icon 
-                            color="#c5c5c5" 
+                            color={iconColor} 
                             icon={icon} 
                             size={50}
                         />
@@ -28,7 +31,7 @@ const InstructionsCmp = ({ icon, children }) => {
                 fontWeight="bold" 
                 textAlign="center" 
                 lineHeight={1.5}
-                color="#c5c5c5"
+                color={textColor}
             >
                 { children }
             </Text>

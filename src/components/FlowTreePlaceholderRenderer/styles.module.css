@@ -1,0 +1,39 @@
+.sortabletree__placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.sortabletree__placeholder::before {
+  border: none !important;
+}
+
+
+/**
+  * The outline of where the element will go if dropped, displayed while dragging
+  */
+.rst__placeholderLandingPad,
+.rst__placeholderCancelPad {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.rst__placeholderLandingPad *,
+.rst__placeholderCancelPad * {
+  opacity: 1 !important;
+}
+
+.rst__placeholderLandingPad::before {
+  background-color: transparent !important;
+}
+
+/**
+  * Alternate appearance of the landing pad when the dragged location is invalid
+  */
+.rst__placeholderCancelPad::before {
+  background-color: transparent !important;
+}
