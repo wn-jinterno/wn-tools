@@ -60,3 +60,10 @@ export const setFlowTreeParsingError = parsingError => ({
         parsingError
     }
 });
+
+export const toggleAllNodesExpandedFlag = allNodesExpanded => ({
+    type: ACTIONS.TOGGLE_ALL_NODES_EXPANDED_FLAG,
+    payload: {
+        allNodesExpanded,
+    }
+})

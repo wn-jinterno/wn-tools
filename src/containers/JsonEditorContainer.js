@@ -24,6 +24,7 @@ const mapStateToProps = (state , ownProps) => {
         setFlowTreeExportName: (flowTreeExportName) => dispatch(GlobalActions.setFlowTreeExportName(flowTreeExportName)),
         setFlowTreeExportNodes: (flowTreeExportNodes) => dispatch(GlobalActions.setFlowTreeExportNodes(flowTreeExportNodes)),
         setJsonEditorContent: (jsonEditorContent) => dispatch(GlobalActions.setJsonEditorContent(jsonEditorContent)),
+        toggleAllNodesExpandedFlag: (allNodesExpanded) => dispatch(GlobalActions.toggleAllNodesExpandedFlag(allNodesExpanded)),
     }
 }
 

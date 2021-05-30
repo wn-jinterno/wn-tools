@@ -83,6 +83,7 @@ class JsonEditorCmp extends React.Component {
             setFlowTreeExportName, 
             setFlowTreeExportNodes, 
             setFlowTreeParsingError,
+            toggleAllNodesExpandedFlag,
         } = this.props;
 
         if (isEmpty(jsonStr)) {
@@ -123,6 +124,7 @@ class JsonEditorCmp extends React.Component {
                         setFlowTreeExportNodes(flowTreeExportFromJSON.nodes);
                         setFlowTree(newTreeFromFlatData);
                         setFlowTreeParsingError("");
+                        toggleAllNodesExpandedFlag(true);
                 } else {
                     throw new Error(`JSON format must be { "name": "tree-name", "nodes": [] }`)
                 }
@@ -167,15 +169,6 @@ class JsonEditorCmp extends React.Component {
 
     renderThemeList = () => {
         const { editorTheme } = this.state;
-        // return (
-        //     <Menu>
-        //         <Menu.Group>
-        //             { this.editorThemeList.map(({ label, theme }) => (
-        //                 <Menu.Item key={theme} iconBefore={isEqual(editorTheme.theme, theme) ? TickIcon : null} onSelect={() => this.setState({ editorTheme: { label, theme} })}>{ label }</Menu.Item>
-        //             ))}
-        //         </Menu.Group>
-        //     </Menu>
-        // )
         return (
             <SelectMenu
                 title="Editor Theme"

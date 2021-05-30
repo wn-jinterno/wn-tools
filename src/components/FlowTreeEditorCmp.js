@@ -12,10 +12,6 @@ import TreeNodeContentRenderer from './TreeNodeContentRenderer';
 class FlowTreeEditor extends React.Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            allNodesExpanded: true,
-        }
         this.fileInputRef = React.createRef();
     }
 
@@ -79,21 +75,20 @@ class FlowTreeEditor extends React.Component {
     }
 
     onExpandAllNodesSwitchChange = e => {
-        const { flowTree, setFlowTree } = this.props;
+        const { flowTree, setFlowTree, toggleAllNodesExpandedFlag } = this.props;
 
-        this.setState({
-            allNodesExpanded: e.target.checked,
-        }, () => {
-            const newTreeData = toggleExpandedForAll({
-                treeData: flowTree,
-                expanded: e.target.checked,
-            })
+        toggleAllNodesExpandedFlag(e.target.checked);
+        const newTreeData = toggleExpandedForAll({
+            treeData: flowTree,
+            expanded: e.target.checked,
+        })
 
-            setFlowTree(newTreeData);
-        });
+        setFlowTree(newTreeData);
     }
 
     onDrop = (files) => {
+        const { toggleAllNodesExpandedFlag } = this.props;
+
         if (!isEmpty(files)) {
             const fileReader = new FileReader();
             fileReader.readAsText(files[0], "UTF-8");
@@ -126,7 +121,8 @@ class FlowTreeEditor extends React.Component {
                         
                         this.onFlowTreeNameChange(jsonData.name);
                         this.onTreeChange(newTreeFromFlatData);
-
+                        toggleAllNodesExpandedFlag(true);
+                        
                         toaster.success("File has been read successfully!");
                     } else {
                         throw new Error(`JSON format must be { "name": "tree-name", "nodes": [] }`)
@@ -143,10 +139,11 @@ class FlowTreeEditor extends React.Component {
     }
 
     clearAllNodes = () => {
-        const { flowTree } = this.props;
+        const { flowTree, toggleAllNodesExpandedFlag } = this.props;
 
         if (!isEmpty(flowTree)) {
             this.onTreeChange([]);
+            toggleAllNodesExpandedFlag(true);
             toaster.notify("Flow tree nodes cleared!");
         }
     }
@@ -156,6 +153,7 @@ class FlowTreeEditor extends React.Component {
             flowTree, 
             flowTreeParsingError,
             flowTreeExportName,
+            allNodesExpanded,
          } = this.props;
         
         return (
@@ -207,7 +205,7 @@ class FlowTreeEditor extends React.Component {
                                 >
                                     <Switch 
                                         disabled={isEmpty(flowTree)}
-                                        checked={this.state.allNodesExpanded} 
+                                        checked={allNodesExpanded} 
                                         onChange={this.onExpandAllNodesSwitchChange} 
                                     />
                                 </Flex>

@@ -12,6 +12,7 @@ const initialState = {
             nodes: [],
         },
         parsingError: "",
+        allNodesExpanded: true,
     }
 };
 
@@ -104,6 +105,17 @@ const globalReducer = (state = initialState, action) => {
                 flowTreeTool: {
                     ...state.flowTreeTool,
                     parsingError,
+                },
+            }
+        }
+        case ACTIONS.TOGGLE_ALL_NODES_EXPANDED_FLAG: {
+            const { allNodesExpanded } = action.payload;
+
+            return {
+                ...state,
+                flowTreeTool: {
+                    ...state.flowTreeTool,
+                    allNodesExpanded,
                 },
             }
         }
