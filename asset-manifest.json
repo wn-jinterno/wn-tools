@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/wn-tools/static/css/main.2f6d8da7.chunk.css",
-    "main.js": "/wn-tools/static/js/main.9671f600.chunk.js",
-    "main.js.map": "/wn-tools/static/js/main.9671f600.chunk.js.map",
+    "main.css": "/wn-tools/static/css/main.a1434ab0.chunk.css",
+    "main.js": "/wn-tools/static/js/main.27bf029b.chunk.js",
+    "main.js.map": "/wn-tools/static/js/main.27bf029b.chunk.js.map",
     "runtime-main.js": "/wn-tools/static/js/runtime-main.0fdd14ea.js",
     "runtime-main.js.map": "/wn-tools/static/js/runtime-main.0fdd14ea.js.map",
     "static/css/2.9c48f3ed.chunk.css": "/wn-tools/static/css/2.9c48f3ed.chunk.css",
-    "static/js/2.55095bcc.chunk.js": "/wn-tools/static/js/2.55095bcc.chunk.js",
-    "static/js/2.55095bcc.chunk.js.map": "/wn-tools/static/js/2.55095bcc.chunk.js.map",
+    "static/js/2.61293099.chunk.js": "/wn-tools/static/js/2.61293099.chunk.js",
+    "static/js/2.61293099.chunk.js.map": "/wn-tools/static/js/2.61293099.chunk.js.map",
     "static/js/3.4f2ee113.chunk.js": "/wn-tools/static/js/3.4f2ee113.chunk.js",
     "static/js/3.4f2ee113.chunk.js.map": "/wn-tools/static/js/3.4f2ee113.chunk.js.map",
     "index.html": "/wn-tools/index.html",
     "static/css/2.9c48f3ed.chunk.css.map": "/wn-tools/static/css/2.9c48f3ed.chunk.css.map",
-    "static/css/main.2f6d8da7.chunk.css.map": "/wn-tools/static/css/main.2f6d8da7.chunk.css.map",
-    "static/js/2.55095bcc.chunk.js.LICENSE.txt": "/wn-tools/static/js/2.55095bcc.chunk.js.LICENSE.txt"
+    "static/css/main.a1434ab0.chunk.css.map": "/wn-tools/static/css/main.a1434ab0.chunk.css.map",
+    "static/js/2.61293099.chunk.js.LICENSE.txt": "/wn-tools/static/js/2.61293099.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0fdd14ea.js",
     "static/css/2.9c48f3ed.chunk.css",
-    "static/js/2.55095bcc.chunk.js",
-    "static/css/main.2f6d8da7.chunk.css",
-    "static/js/main.9671f600.chunk.js"
+    "static/js/2.61293099.chunk.js",
+    "static/css/main.a1434ab0.chunk.css",
+    "static/js/main.27bf029b.chunk.js"
   ]
 }
